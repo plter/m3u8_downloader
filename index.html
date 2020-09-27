@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <title>Hello World!</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="root" style="padding: 10px;display: flex;flex-direction: column;height: 100%;">
+    <div style="display: flex;flex-direction: row;align-items: center;">
+        <div style="width: 6rem">下载目录：</div>
+        <input type="text" class="form-control" style="flex: 1;" readonly v-model="download_dir">
+        <button class="btn btn-primary" style="margin-left: 5px" @click="browseForDownloadDir" :disabled="downloading">浏览
+        </button>
+    </div>
+    <div style="display: flex;flex-direction: row;align-items: center;margin-top: 5px;">
+        <div style="width: 6rem;">m3u8地址：</div>
+        <input type="text" class="form-control" style="flex: 2;" v-model="m3u8_url" :disabled="downloading">
+        <button class="btn btn-primary" style="margin-left: 5px;" @click="start_download" :disabled="downloading">下载
+        </button>
+    </div>
+    <textarea readonly style="flex: 1;margin-top: 5px;" v-model="output" ref="outputTa"></textarea>
+</div>
+
+<!-- You can also require other files to run in this process -->
+<script src="./renderer.js"></script>
+</body>
 </html>
